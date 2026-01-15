@@ -18,7 +18,7 @@ class Livro {
       .select('*')
       .then(rows => {
         const retorno = rows.map(async res =>
-          this.pegarImagensLivros(res.id).then(result => ({ livro: res, imagens: result }))
+          Livro.pegarImagensLivros(res.id).then(result => ({ livro: res, imagens: result }))
         )
 
         return Promise.all(retorno)
@@ -31,7 +31,7 @@ class Livro {
 
   static async pegarPeloId(id) {
     const resultado = await db.select('*').from('livros').where({ id })
-    const imagens = await this.pegarImagensLivros(id)
+    const imagens = await Livro.pegarImagensLivros(id)
     return { livro: resultado[0], imagens }
   }
 

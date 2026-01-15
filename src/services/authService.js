@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs'
 import jsonwebtoken from 'jsonwebtoken'
-import Usuario from '../models/usuario.js'
 import constants from '../config/constants.js'
+import Usuario from '../models/usuario.js'
 
 class AuthService {
   async login(data) {
@@ -44,10 +44,14 @@ class AuthService {
   }
 
   async cadastrarUsuario(data) {
-    data.senha = await bcryptjs.hash(data.senha, 8)
-
-    const usuario = new Usuario(data)
     try {
+      if (!data.senha) {
+        throw new Error('A senha do usuario é obrigatória!')
+      }
+
+      data.senha = await bcryptjs.hash(data.senha, 8)
+
+      const usuario = new Usuario(data)
       const resposta = await usuario.salvar(usuario)
       return { message: 'usuario criado', content: resposta }
     } catch (err) {

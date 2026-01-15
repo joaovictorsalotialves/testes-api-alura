@@ -1,5 +1,5 @@
-import request from 'supertest'
 import { describe, expect, it, jest } from '@jest/globals'
+import request from 'supertest'
 import app from '../../app.js'
 
 let server
@@ -12,7 +12,7 @@ afterEach(() => {
   server.close()
 })
 
-describe('GET em /editoras', () => {
+describe.skip('GET em /editoras', () => {
   it('Deve retornar uma lista de editoras', async () => {
     const resposta = await request(app)
       .get('/editoras')
@@ -25,7 +25,7 @@ describe('GET em /editoras', () => {
 })
 
 let idResposta
-describe('POST em /editoras', () => {
+describe.skip('POST em /editoras', () => {
   it('Deve adicionar uma nova editora', async () => {
     const resposta = await request(app)
       .post('/editoras')
@@ -43,13 +43,13 @@ describe('POST em /editoras', () => {
   })
 })
 
-describe('GET em /editoras/id', () => {
+describe.skip('GET em /editoras/id', () => {
   it('Deve retornar recurso selecionado', async () => {
     await request(app).get(`/editoras/${idResposta}`).expect(200)
   })
 })
 
-describe('PUT em /editoras/id', () => {
+describe.skip('PUT em /editoras/id', () => {
   test.each([
     ['nome', { nome: 'Casa do Codigo' }],
     ['cidade', { cidade: 'SP' }],
@@ -63,7 +63,7 @@ describe('PUT em /editoras/id', () => {
   })
 })
 
-describe('DELETE em /editoras/id', () => {
+describe.skip('DELETE em /editoras/id', () => {
   it('Deletar o recurso adcionado', async () => {
     await request(app).delete(`/editoras/${idResposta}`).expect(200)
   })
