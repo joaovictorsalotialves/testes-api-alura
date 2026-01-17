@@ -34,6 +34,18 @@ class LivrosImagensService {
         base64: base64Image,
       }
 
+      if (!data.livro_id) {
+        throw new Error('O id do livro é obrigatório.')
+      }
+
+      if (data.mimetype !== 'image/png' && data.mimetype !== 'image/jpg' && data.mimetype !== 'image/jpeg') {
+        throw new Error(`O formato ${data.mimetype} não é permitido.`)
+      }
+
+      if (data.size > 5000) {
+        throw new Error('O limite para upload de imagem é de 5000kb.')
+      }
+
       const imagem = new LivroImagem(data)
       const resposta = await imagem.salvar(imagem)
 
