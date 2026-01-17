@@ -19,5 +19,7 @@ describe('Testando configDB', () => {
       )
 
     expect(autorSalvo.nome).toBe(autorMock.nome)
+
+    await db('autores').where({ id: autorSalvo.id }).del()
   })
 })
