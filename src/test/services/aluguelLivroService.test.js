@@ -1,4 +1,4 @@
-import { describe } from '@jest/globals'
+import { describe, expect } from '@jest/globals'
 import AluguelLivroService from '../../services/aluguelLivroService.js'
 
 const aluguelLivroService = new AluguelLivroService()
@@ -10,5 +10,7 @@ describe('Testando AluguelLivroService', () => {
     const dataDevolucaoMock = new Date('2023-01-06')
 
     const dataDevolucao = await aluguelLivroService.calcularDataDevolucao(dataAlugado, numeroDiasAlugado)
+
+    expect(dataDevolucao).toStrictEqual(dataDevolucaoMock)
   })
 })

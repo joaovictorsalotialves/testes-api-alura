@@ -100,7 +100,12 @@ class AluguelLivroService {
   }
 
   async calcularDataDevolucao(dataAlugado, numeroDiasAlugado) {
-    return true
+    if (numeroDiasAlugado > 0) {
+      throw new Error('Número de dias alugados deve ser maior que zero')
+    }
+
+    const dataDevolucao = new Date(dataAlugado.setDate(dataAlugado.getDate() + numeroDiasAlugado))
+    return dataDevolucao
   }
 }
 
